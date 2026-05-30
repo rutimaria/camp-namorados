@@ -1,0 +1,396 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kit Romântico Completo — Dia dos Namorados</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Mulish:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --bg:#090608;--bg2:#0f0a0e;--bg3:#150d14;
+      --rose:#7a1f45;--rose-light:#b03060;--rose-glow:rgba(122,31,69,.3);
+      --candle:#e8b840;--candle-light:#f5d070;--candle-glow:rgba(232,184,64,.2);
+      --cream:#f5edf2;--muted:#8a7080;--border:rgba(232,184,64,.15);
+    }
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--cream);font-family:'Mulish',sans-serif;font-weight:300;line-height:1.7;overflow-x:hidden}
+
+    /* candle flicker effect */
+    @keyframes flicker{0%,100%{opacity:1;transform:scaleY(1)}45%{opacity:.9;transform:scaleY(.97)}55%{opacity:.95;transform:scaleY(1.02)}75%{opacity:.88;transform:scaleY(.98)}}
+
+    .top-bar{background:linear-gradient(90deg,#1a0810,var(--rose-light),#1a0810);background-size:200% 100%;animation:bar 4s linear infinite;padding:10px 16px;text-align:center;font-size:.76rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:#ffd0e8;position:relative;z-index:10}
+    @keyframes bar{0%{background-position:200% 0}100%{background-position:-200% 0}}
+    .top-bar .dot{display:inline-block;width:6px;height:6px;background:#ffb0c8;border-radius:50%;margin-right:8px;animation:blink 1s infinite;vertical-align:middle}
+    @keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+
+    /* HERO */
+    .hero{position:relative;min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:64px 24px 80px;text-align:center;overflow:hidden}
+    .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 65% 50% at 50% 30%,rgba(122,31,69,.22),transparent 70%),radial-gradient(ellipse 40% 35% at 70% 75%,rgba(232,184,64,.08),transparent 60%);pointer-events:none}
+
+    /* warm candle glow orbs */
+    .glow-orb{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none;animation:pulse-orb ease-in-out infinite}
+    .glow-orb-1{width:280px;height:280px;background:rgba(232,184,64,.08);top:-60px;left:-40px;animation-duration:9s}
+    .glow-orb-2{width:200px;height:200px;background:rgba(122,31,69,.1);bottom:60px;right:-30px;animation-duration:12s;animation-delay:3s}
+    @keyframes pulse-orb{0%,100%{transform:scale(1);opacity:.7}50%{transform:scale(1.1);opacity:1}}
+
+    .hero-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(122,31,69,.15);border:1px solid rgba(176,48,96,.3);border-radius:20px;padding:6px 18px;font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--rose-light);margin-bottom:24px;opacity:0;animation:fadeUp .7s .2s forwards}
+    .hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,6vw,3.6rem);font-weight:400;line-height:1.15;max-width:700px;margin-bottom:18px;opacity:0;animation:fadeUp .8s .35s forwards}
+    .hero h1 em{font-style:italic;color:var(--candle-light)}
+    .hero-sub{font-size:.93rem;color:var(--muted);max-width:520px;margin-bottom:32px;opacity:0;animation:fadeUp .8s .5s forwards}
+
+    /* kit showcase */
+    .hero-kit{position:relative;width:min(400px,90vw);margin:0 auto 36px;opacity:0;animation:fadeUp .9s .62s forwards}
+    .hero-kit img{width:100%;border-radius:12px;display:block;filter:drop-shadow(0 24px 60px var(--rose-glow))}
+    .hero-kit::after{content:'';position:absolute;bottom:-20px;left:10%;right:10%;height:36px;background:radial-gradient(ellipse,rgba(122,31,69,.5),transparent 70%);filter:blur(10px)}
+
+    /* item pills floating */
+    .kit-pills{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:28px;opacity:0;animation:fadeUp .7s .72s forwards}
+    .kit-pill{background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:6px 14px;font-size:.75rem;color:var(--cream);display:flex;align-items:center;gap:6px}
+    .kit-pill span{font-size:1rem}
+
+    .btn-cta{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,var(--rose-light),var(--rose));color:#fff;font-family:'Mulish',sans-serif;font-size:1rem;font-weight:600;letter-spacing:.05em;text-decoration:none;padding:18px 42px;border-radius:3px;border:1px solid rgba(255,255,255,.1);box-shadow:0 4px 30px var(--rose-glow),inset 0 1px 0 rgba(255,255,255,.08);transition:transform .2s,box-shadow .2s;position:relative;overflow:hidden;opacity:0;animation:fadeUp .7s .86s forwards}
+    .btn-cta::before{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.1),transparent);animation:sweep 3s 2s infinite}
+    @keyframes sweep{0%{left:-100%}100%{left:200%}}
+    .btn-cta:hover{transform:translateY(-2px);box-shadow:0 8px 40px rgba(176,48,96,.6)}
+    .btn-cta svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2}
+    .trust-row{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-top:18px;opacity:0;animation:fadeUp .7s 1s forwards}
+    .trust-item{display:flex;align-items:center;gap:6px;font-size:.73rem;color:var(--muted)}
+    .trust-item svg{width:13px;height:13px;stroke:var(--candle);fill:none;stroke-width:2}
+
+    /* COUNTDOWN */
+    .countdown-wrap{background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:26px 24px;text-align:center;max-width:780px;margin:0 auto;position:relative;z-index:1}
+    .countdown-label{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--candle);margin-bottom:14px}
+    .countdown-timer{display:flex;justify-content:center;gap:8px}
+    .countdown-unit{display:flex;flex-direction:column;align-items:center;background:var(--bg3);border:1px solid var(--border);border-radius:4px;padding:12px 16px;min-width:62px}
+    .countdown-unit .num{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:600;line-height:1}
+    .countdown-unit .lbl{font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+    .countdown-sep{font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--candle);align-self:flex-start;padding-top:8px}
+
+    /* SECTIONS */
+    section{position:relative;z-index:1}
+    .section-inner{max-width:780px;margin:0 auto;padding:80px 24px}
+    .section-eyebrow{font-size:.68rem;letter-spacing:.25em;text-transform:uppercase;color:var(--candle);margin-bottom:12px}
+    .section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(1.75rem,4.5vw,2.7rem);font-weight:400;line-height:1.2;margin-bottom:24px}
+    .section-title em{font-style:italic;color:var(--candle-light)}
+    .rose-line{width:48px;height:1px;background:linear-gradient(90deg,var(--candle),transparent);margin-bottom:24px}
+
+    /* RITUAL SECTION */
+    .ritual{background:var(--bg2)}
+    .ritual-steps{display:flex;flex-direction:column;gap:0;margin-top:40px}
+    .ritual-step{display:grid;grid-template-columns:64px 1fr;gap:24px;align-items:start;padding:28px 0;border-bottom:1px solid var(--border)}
+    .ritual-step:last-child{border-bottom:none}
+    .step-num{width:48px;height:48px;border-radius:50%;background:var(--bg3);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;color:var(--candle);flex-shrink:0;margin-top:4px}
+    .step-content h3{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:400;margin-bottom:6px;color:var(--cream)}
+    .step-content p{font-size:.88rem;color:var(--muted);line-height:1.7}
+    .step-content em{font-style:italic;color:var(--candle-light)}
+
+    /* INCLUDED */
+    .included{background:var(--bg)}
+    .included-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+    @media(max-width:640px){.included-grid{grid-template-columns:1fr;gap:28px}}
+    .included-img img{width:100%;border-radius:10px;display:block;filter:drop-shadow(0 12px 40px var(--rose-glow))}
+    .bullets-list{list-style:none;display:flex;flex-direction:column;gap:16px}
+    .bullets-list li{display:flex;gap:14px;align-items:flex-start}
+    .bullet-icon{flex-shrink:0;width:28px;height:28px;background:linear-gradient(135deg,var(--rose-light),var(--rose));border-radius:50%;display:flex;align-items:center;justify-content:center;margin-top:2px}
+    .bullet-icon svg{width:12px;height:12px;stroke:#fff;fill:none;stroke-width:2.5}
+    .bullet-text strong{display:block;font-size:.9rem;font-weight:500;color:var(--cream);margin-bottom:2px}
+    .bullet-text span{font-size:.82rem;color:var(--muted);line-height:1.6}
+
+    /* TESTIMONIALS */
+    .testimonials{background:var(--bg2)}
+    .testimonials-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    @media(max-width:700px){.testimonials-grid{grid-template-columns:1fr}}
+    .testimonial-card{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:22px 18px;position:relative}
+    .testimonial-card::before{content:'"';font-family:'Cormorant Garamond',serif;font-size:4rem;color:var(--rose);line-height:1;position:absolute;top:10px;left:14px;opacity:.3}
+    .stars{display:flex;gap:3px;margin-bottom:12px}
+    .stars svg{width:13px;height:13px;fill:#c9a84c;stroke:none}
+    .testimonial-text{font-size:.86rem;color:rgba(245,237,242,.8);line-height:1.75;margin-bottom:14px;position:relative;z-index:1}
+    .testimonial-author{font-size:.76rem;color:var(--muted)}
+    .testimonial-author strong{color:var(--candle);font-weight:500;display:block}
+    .verified{display:inline-flex;align-items:center;gap:4px;font-size:.63rem;color:#4caf7d;letter-spacing:.08em;text-transform:uppercase;margin-top:6px}
+    .verified svg{width:10px;height:10px;stroke:#4caf7d;fill:none;stroke-width:2.5}
+
+    /* OFFER */
+    .offer{background:var(--bg)}
+    .offer-box{background:var(--bg2);border:1px solid rgba(232,184,64,.2);border-radius:10px;padding:48px 40px;text-align:center;position:relative;overflow:hidden}
+    @media(max-width:500px){.offer-box{padding:32px 18px}}
+    .offer-box::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 55% 40% at 50% 0%,rgba(122,31,69,.12),transparent),radial-gradient(ellipse 55% 40% at 50% 100%,rgba(232,184,64,.07),transparent);pointer-events:none}
+    .offer-tag{display:inline-block;background:linear-gradient(135deg,var(--rose-light),var(--rose));color:#fff;font-size:.66rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;padding:5px 14px;border-radius:2px;margin-bottom:24px}
+    .offer-title{font-family:'Cormorant Garamond',serif;font-size:clamp(1.5rem,4vw,2.2rem);font-weight:400;margin-bottom:6px}
+    .offer-subtitle{font-size:.84rem;color:var(--muted);margin-bottom:28px}
+    .offer-items{display:flex;flex-direction:column;gap:10px;max-width:380px;margin:0 auto 28px;text-align:left}
+    .offer-item{display:flex;align-items:center;gap:12px;font-size:.9rem}
+    .offer-item svg{width:16px;height:16px;stroke:var(--candle);fill:none;stroke-width:2;flex-shrink:0}
+    .divider{width:100%;height:1px;background:var(--border);margin:24px 0}
+    .price-label{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+    .price-main{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,8vw,4.5rem);font-weight:600;line-height:1}
+    .price-main sup{font-size:.38em;vertical-align:super;color:var(--candle)}
+    .price-main .cents{font-size:.35em;vertical-align:baseline;color:var(--muted);font-weight:300}
+    .price-note{font-size:.76rem;color:var(--muted);margin-top:6px;margin-bottom:28px}
+    .btn-cta-large{display:inline-flex;align-items:center;justify-content:center;gap:12px;background:linear-gradient(135deg,var(--rose-light) 0%,var(--rose) 60%,#500015 100%);color:#fff;font-family:'Mulish',sans-serif;font-size:1.05rem;font-weight:600;letter-spacing:.06em;text-decoration:none;padding:20px 48px;border-radius:3px;border:1px solid rgba(255,255,255,.1);box-shadow:0 6px 40px var(--rose-glow),inset 0 1px 0 rgba(255,255,255,.07);transition:transform .2s,box-shadow .2s;width:100%;max-width:420px;position:relative;overflow:hidden}
+    .btn-cta-large::before{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.09),transparent);animation:sweep 3s 1s infinite}
+    .btn-cta-large:hover{transform:translateY(-2px);box-shadow:0 10px 50px rgba(176,48,96,.6)}
+    .btn-cta-large svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2}
+    .trust-badges{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-top:18px}
+    .badge{display:flex;align-items:center;gap:6px;font-size:.73rem;color:var(--muted)}
+    .badge svg{width:14px;height:14px;stroke:var(--candle);fill:none;stroke-width:2}
+
+    /* URGENCY */
+    .urgency-section{background:linear-gradient(135deg,#0e0408,var(--bg),#0e0408);border-top:1px solid rgba(122,31,69,.3);border-bottom:1px solid rgba(122,31,69,.3)}
+    .urgency-section .section-inner{padding:56px 24px;text-align:center}
+    .urgency-section p{font-size:.88rem;color:var(--muted);margin-bottom:28px}
+
+    /* FAQ */
+    .faq{background:var(--bg2)}
+    .faq-item{border-bottom:1px solid var(--border)}
+    .faq-question{width:100%;background:none;border:none;color:var(--cream);font-family:'Mulish',sans-serif;font-size:.93rem;font-weight:400;text-align:left;padding:20px 0;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;transition:color .2s}
+    .faq-question:hover{color:var(--candle-light)}
+    .faq-question svg{width:18px;height:18px;stroke:var(--candle);fill:none;stroke-width:2;flex-shrink:0;transition:transform .3s}
+    .faq-item.open .faq-question svg{transform:rotate(45deg)}
+    .faq-answer{font-size:.86rem;color:var(--muted);line-height:1.8;max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s}
+    .faq-item.open .faq-answer{max-height:200px;padding-bottom:18px}
+
+    footer{background:var(--bg);border-top:1px solid var(--border);padding:36px 24px;text-align:center}
+    footer p{font-size:.76rem;color:var(--muted);line-height:1.8}
+    .sticky-cta{display:none;position:fixed;bottom:0;left:0;right:0;z-index:100;background:var(--bg2);border-top:1px solid var(--border);padding:12px 16px}
+    @media(max-width:600px){.sticky-cta{display:block}}
+    .sticky-cta a{display:block;background:linear-gradient(135deg,var(--rose-light),var(--rose));color:#fff;text-align:center;font-family:'Mulish',sans-serif;font-size:.9rem;font-weight:600;text-decoration:none;padding:14px;border-radius:3px}
+
+    .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+  </style>
+</head>
+<body>
+
+<div class="top-bar"><span class="dot"></span>Dia dos Namorados: 12 de junho — o kit que transforma uma noite comum em especial</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="glow-orb glow-orb-1"></div>
+  <div class="glow-orb glow-orb-2"></div>
+
+  <div class="hero-tag">🕯️ Kit romântico completo</div>
+  <h1>Você não está dando um kit.<br>Está dando <em>uma noite.</em></h1>
+  <p class="hero-sub">Vela aromática + rosas eternas na redoma + ursinho + caneca + cartão "Para sempre você, meu muito amor" — apresentado em bandeja, pronto pra entregar.</p>
+
+  <div class="hero-kit">
+    <img src="imagens/05/img-133.png" alt="Kit romântico completo em bandeja">
+  </div>
+
+  <div class="kit-pills">
+    <div class="kit-pill"><span>🕯️</span> Vela aromática</div>
+    <div class="kit-pill"><span>🌹</span> Rosas eternas</div>
+    <div class="kit-pill"><span>🧸</span> Ursinho</div>
+    <div class="kit-pill"><span>☕</span> Caneca</div>
+    <div class="kit-pill"><span>💌</span> Cartão</div>
+  </div>
+
+  <a href="https://pay.cakto.com.br/PRODUTO-05" class="btn-cta">
+    <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+    Quero criar essa noite pra ela
+  </a>
+  <div class="trust-row">
+    <span class="trust-item"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Compra 100% segura</span>
+    <span class="trust-item"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><path d="M16 8h5l3 3v5h-8V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>Entrega garantida</span>
+    <span class="trust-item"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>Satisfação garantida</span>
+  </div>
+</section>
+
+<div style="position:relative;z-index:1;padding:0 24px">
+  <div class="countdown-wrap reveal">
+    <div class="countdown-label">⏳ Tempo restante até o Dia dos Namorados</div>
+    <div class="countdown-timer">
+      <div class="countdown-unit"><span class="num" id="cd-days">--</span><span class="lbl">dias</span></div>
+      <span class="countdown-sep">:</span>
+      <div class="countdown-unit"><span class="num" id="cd-hours">--</span><span class="lbl">horas</span></div>
+      <span class="countdown-sep">:</span>
+      <div class="countdown-unit"><span class="num" id="cd-mins">--</span><span class="lbl">min</span></div>
+      <span class="countdown-sep">:</span>
+      <div class="countdown-unit"><span class="num" id="cd-secs">--</span><span class="lbl">seg</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- RITUAL SECTION -->
+<section class="ritual">
+  <div class="section-inner">
+    <div class="reveal" style="text-align:center">
+      <div class="section-eyebrow">O que acontece quando ela abre</div>
+      <h2 class="section-title">Não é um presente.<br><em>É um ritual.</em></h2>
+      <div class="rose-line" style="margin:0 auto 0"></div>
+    </div>
+    <div class="ritual-steps reveal">
+      <div class="ritual-step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h3>Ela acende a vela</h3>
+          <p>O ambiente muda em segundos. O perfume espalha. O quarto fica diferente — <em>intencional, quente, especial.</em> Ela percebe que você pensou nisso.</p>
+        </div>
+      </div>
+      <div class="ritual-step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h3>Ela vê as rosas na redoma</h3>
+          <p>Rosas eternas que nunca vão murchar. Ela sabe o que isso significa: <em>um amor que não perece.</em> E vai colocar num lugar de destaque.</p>
+        </div>
+      </div>
+      <div class="ritual-step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h3>Ela faz a caneca quente</h3>
+          <p>O chá, o café, o chocolate. Com a caneca que você deu. <em>Todo dia ela vai lembrar de você</em> quando usar.</p>
+        </div>
+      </div>
+      <div class="ritual-step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <h3>Ela lê o cartão</h3>
+          <p><em>"Para sempre você, meu muito amor."</em> Você só precisa assinar embaixo. O restante já está lá, esperando.</p>
+        </div>
+      </div>
+      <div class="ritual-step">
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <h3>Ela te manda mensagem</h3>
+          <p>Não é obrigação. É gratidão real: <em>"foi perfeito. você pensou em tudo."</em> Porque você pensou mesmo.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INCLUDED -->
+<section class="included">
+  <div class="section-inner">
+    <div class="included-grid reveal">
+      <div class="included-img">
+        <img src="imagens/05/img-136.png" alt="Um presente que transforma momentos simples em memórias especiais">
+      </div>
+      <div>
+        <div class="section-eyebrow">O que vem no kit</div>
+        <h2 class="section-title">Cada item.<br><em>Um momento.</em></h2>
+        <div class="rose-line"></div>
+        <ul class="bullets-list">
+          <li><div class="bullet-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="bullet-text"><strong>Vela aromática premium</strong><span>Perfume que transforma o ambiente na hora. "Para tornar os momentos aconchegantes ainda mais marcantes"</span></div></li>
+          <li><div class="bullet-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="bullet-text"><strong>Rosas eternas na redoma</strong><span>Não murcham, não precisam de água, ficam lindas por anos. O amor que não passa, em forma de rosa</span></div></li>
+          <li><div class="bullet-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="bullet-text"><strong>Ursinho de pelúcia</strong><span>O item afetivo que vai pro travesseiro dela — e fica lá muito depois do Dia dos Namorados</span></div></li>
+          <li><div class="bullet-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="bullet-text"><strong>Caneca personalizada</strong><span>Para o chá, café ou chocolate quente dela. Todo dia ela vai usar e lembrar</span></div></li>
+          <li><div class="bullet-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="bullet-text"><strong>Cartão "Para sempre você, meu muito amor"</strong><span>Você só assina embaixo. A mensagem já está lá, pronta</span></div></li>
+          <li><div class="bullet-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="bullet-text"><strong>Apresentação em bandeja</strong><span>Tudo montado, parece produção profissional — ela vai fotografar antes de tocar</span></div></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="section-inner">
+    <div class="reveal" style="text-align:center;margin-bottom:40px">
+      <div class="section-eyebrow">Quem criou a noite</div>
+      <h2 class="section-title">"Você pensou<br><em>em tudo."</em></h2>
+    </div>
+    <div class="testimonials-grid reveal">
+      <div class="testimonial-card">
+        <div class="stars"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+        <p class="testimonial-text">"Ela acendeu a vela, colocou as rosas na bancada, fez o chá com a caneca e ficou a noite toda com o ursinho. Me ligou dizendo que foi o presente mais completo que já recebeu."</p>
+        <div class="testimonial-author"><strong>Vinícius R.</strong>São Paulo · comprou há 3 semanas</div>
+        <div class="verified"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Compra verificada</div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+        <p class="testimonial-text">"A vela ainda está sendo usada, as rosas estão lindas na estante. Ela fotografou cada item separado. O cartão ela disse que guardou. Tudo junto criou uma atmosfera que só o kit completo conseguiria."</p>
+        <div class="testimonial-author"><strong>Gabriel M.</strong>Belo Horizonte · comprou no mês passado</div>
+        <div class="verified"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Compra verificada</div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+        <p class="testimonial-text">"Minha namorada disse que foi a primeira vez que um presente criou um ambiente, não só deu um objeto. A bandeja com tudo arrumado junto é o que fez a diferença — pareceu planejado por profissional."</p>
+        <div class="testimonial-author"><strong>Leandro C.</strong>Porto Alegre · comprou há 2 semanas</div>
+        <div class="verified"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Compra verificada</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OFFER -->
+<section class="offer" id="checkout">
+  <div class="section-inner">
+    <div class="offer-box reveal">
+      <div class="offer-tag">Kit completo · Dia dos Namorados</div>
+      <h2 class="offer-title">Vela. Rosas. Ursinho.<br>Caneca. Cartão. Bandeja.</h2>
+      <p class="offer-subtitle">Tudo para criar uma noite que ela vai lembrar para sempre.</p>
+      <div class="offer-items">
+        <div class="offer-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Vela aromática premium</div>
+        <div class="offer-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Rosas eternas na redoma</div>
+        <div class="offer-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Ursinho de pelúcia</div>
+        <div class="offer-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Caneca personalizada</div>
+        <div class="offer-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Cartão "Para sempre você, meu muito amor"</div>
+        <div class="offer-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Apresentação em bandeja — pronto para entregar</div>
+      </div>
+      <div class="divider"></div>
+      <div class="price-label">Tudo isso por apenas</div>
+      <div class="price-main"><sup>R$</sup>78<span class="cents">,90</span></div>
+      <p class="price-note">Frete grátis · Pagamento seguro · Entrega antes do dia 12</p>
+      <a href="https://pay.cakto.com.br/PRODUTO-05" class="btn-cta-large">
+        <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        Quero criar essa noite pra ela
+      </a>
+      <div class="trust-badges">
+        <div class="badge"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Compra 100% segura</div>
+        <div class="badge"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><path d="M16 8h5l3 3v5h-8V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>Entrega garantida</div>
+        <div class="badge"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>Satisfação garantida</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- URGENCY -->
+<section class="urgency-section">
+  <div class="section-inner">
+    <div class="section-eyebrow reveal" style="text-align:center">⚠️ Atenção</div>
+    <h2 class="section-title reveal" style="text-align:center">Dia dos Namorados: <em>12 de junho</em><br>— últimas unidades</h2>
+    <p class="reveal" style="text-align:center">Pedidos feitos agora chegam antes do dia 12. Estoque limitado para o Dia dos Namorados.</p>
+    <div style="text-align:center" class="reveal">
+      <a href="https://pay.cakto.com.br/PRODUTO-05" class="btn-cta">
+        <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        Garantir antes que acabe
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <div class="section-inner">
+    <div class="reveal" style="margin-bottom:36px">
+      <div class="section-eyebrow">Perguntas frequentes</div>
+      <h2 class="section-title">Dúvidas<br><em>respondidas</em></h2>
+      <div class="rose-line"></div>
+    </div>
+    <div class="faq-list reveal">
+      <div class="faq-item"><button class="faq-question">A vela aromática tem cheiro forte ou suave?<svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><div class="faq-answer">A vela tem fragrância equilibrada — aconchegante, não enjoativa. Perfuma o ambiente de forma agradável sem ser invasiva. Ideal para criar aquele clima romântico sem exagero.</div></div>
+      <div class="faq-item"><button class="faq-question">As rosas eternas realmente ficam bonitas por anos?<svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><div class="faq-answer">Sim. São rosas frescas que passaram por processo de preservação natural. Mantêm cor, forma e textura por anos sem necessitar de água, luz especial ou qualquer cuidado. Basta manter longe de umidade excessiva e luz solar direta.</div></div>
+      <div class="faq-item"><button class="faq-question">Chega antes do Dia dos Namorados (12/06)?<svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><div class="faq-answer">Sim. Prazo estimado de 5 a 10 dias úteis. Você recebe código de rastreio por e-mail assim que o pedido for despachado e pode acompanhar em tempo real.</div></div>
+    </div>
+  </div>
+</section>
+
+<footer><p>© 2026 · Todos os direitos reservados<br>Este site não é afiliado ao Facebook, Instagram ou Meta Platforms Inc.<br><small>Depoimentos são de clientes reais. Resultados podem variar.</small></p></footer>
+<div class="sticky-cta"><a href="https://pay.cakto.com.br/PRODUTO-05">🔒 Kit Romântico Completo — R$78,90</a></div>
+
+<script>
+  function tick(){const t=new Date('2026-06-12T00:00:00'),d=t-new Date();if(d<=0)return;document.getElementById('cd-days').textContent=String(Math.floor(d/86400000)).padStart(2,'0');document.getElementById('cd-hours').textContent=String(Math.floor((d%86400000)/3600000)).padStart(2,'0');document.getElementById('cd-mins').textContent=String(Math.floor((d%3600000)/60000)).padStart(2,'0');document.getElementById('cd-secs').textContent=String(Math.floor((d%60000)/1000)).padStart(2,'0')}
+  tick();setInterval(tick,1000);
+  const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');obs.unobserve(x.target)}})},{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+  document.querySelectorAll('.faq-question').forEach(b=>{b.addEventListener('click',()=>{const i=b.parentElement,o=i.classList.contains('open');document.querySelectorAll('.faq-item').forEach(x=>x.classList.remove('open'));if(!o)i.classList.add('open')})});
+  const offer=document.getElementById('checkout'),sticky=document.querySelector('.sticky-cta');
+  if(offer&&sticky)new IntersectionObserver(e=>{sticky.style.display=e[0].isIntersecting?'none':''},{ threshold:.2}).observe(offer);
+</script>
+</body>
+</html>

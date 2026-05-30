@@ -1,0 +1,359 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cesta Amo Você + Chocolates — Dia dos Namorados</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --bg:#0b0805;--bg2:#110e09;--bg3:#161009;
+      --amber:#b86a10;--amber-light:#e8a040;--amber-glow:rgba(184,106,16,0.25);
+      --gold:#c9a84c;--gold-light:#e8cc7a;
+      --cream:#f5efe4;--muted:#8a7860;--border:rgba(232,160,64,0.16);
+    }
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--cream);font-family:'DM Sans',sans-serif;font-weight:300;line-height:1.7;overflow-x:hidden}
+
+    .top-bar{background:linear-gradient(90deg,#1a0e04,var(--amber),#1a0e04);background-size:200% 100%;animation:bar 4s linear infinite;padding:10px 16px;text-align:center;font-size:.76rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:#fff;position:relative;z-index:10}
+    @keyframes bar{0%{background-position:200% 0}100%{background-position:-200% 0}}
+    .top-bar .dot{display:inline-block;width:6px;height:6px;background:#ffc060;border-radius:50%;margin-right:8px;animation:blink 1s infinite;vertical-align:middle}
+    @keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+
+    /* HERO */
+    .hero{position:relative;min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 24px 80px;text-align:center;overflow:hidden}
+    .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 55% at 50% 30%,rgba(184,106,16,.2),transparent 70%),radial-gradient(ellipse 40% 40% at 30% 80%,rgba(201,168,76,.07),transparent 60%);pointer-events:none}
+    .hero-eyebrow{font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;color:var(--amber-light);margin-bottom:20px;opacity:0;animation:fadeUp .7s .2s forwards}
+    .hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,6vw,3.5rem);font-weight:400;line-height:1.18;max-width:700px;margin-bottom:18px;opacity:0;animation:fadeUp .8s .35s forwards}
+    .hero h1 em{font-style:italic;color:var(--amber-light)}
+    .hero-sub{font-size:.93rem;color:var(--muted);max-width:500px;margin-bottom:32px;opacity:0;animation:fadeUp .8s .5s forwards}
+    .hero-img{position:relative;width:min(360px,88vw);margin:0 auto 36px;opacity:0;animation:fadeUp .9s .6s forwards}
+    .hero-img img{width:100%;border-radius:12px;display:block;filter:drop-shadow(0 20px 50px rgba(184,106,16,.4))}
+    .hero-img::after{content:'';position:absolute;bottom:-16px;left:10%;right:10%;height:32px;background:radial-gradient(ellipse,rgba(184,106,16,.45),transparent 70%);filter:blur(8px)}
+
+    .btn-cta{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,var(--amber),#7a4008);color:#fff;font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:600;letter-spacing:.05em;text-decoration:none;padding:18px 42px;border-radius:3px;border:1px solid rgba(255,255,255,.1);box-shadow:0 4px 30px rgba(184,106,16,.5),inset 0 1px 0 rgba(255,255,255,.08);transition:transform .2s,box-shadow .2s;position:relative;overflow:hidden;opacity:0;animation:fadeUp .7s .8s forwards}
+    .btn-cta::before{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.1),transparent);animation:sweep 3s 2s infinite}
+    @keyframes sweep{0%{left:-100%}100%{left:200%}}
+    .btn-cta:hover{transform:translateY(-2px);box-shadow:0 8px 40px rgba(184,106,16,.6)}
+    .btn-cta svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2}
+    .trust-row{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-top:18px;opacity:0;animation:fadeUp .7s 1s forwards}
+    .trust-item{display:flex;align-items:center;gap:6px;font-size:.73rem;color:var(--muted)}
+    .trust-item svg{width:13px;height:13px;stroke:var(--amber-light);fill:none;stroke-width:2}
+
+    /* COUNTDOWN */
+    .countdown-wrap{background:var(--bg2);border:1px solid var(--border);border-radius:6px;padding:26px 24px;text-align:center;max-width:780px;margin:0 auto;position:relative;z-index:1}
+    .countdown-label{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--amber-light);margin-bottom:14px}
+    .countdown-timer{display:flex;justify-content:center;gap:8px}
+    .countdown-unit{display:flex;flex-direction:column;align-items:center;background:var(--bg3);border:1px solid var(--border);border-radius:4px;padding:12px 16px;min-width:62px}
+    .countdown-unit .num{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:600;line-height:1}
+    .countdown-unit .lbl{font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+    .countdown-sep{font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--amber-light);align-self:flex-start;padding-top:8px}
+
+    /* SECTIONS */
+    section{position:relative;z-index:1}
+    .section-inner{max-width:780px;margin:0 auto;padding:80px 24px}
+    .section-eyebrow{font-size:.68rem;letter-spacing:.25em;text-transform:uppercase;color:var(--amber-light);margin-bottom:12px}
+    .section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(1.75rem,4.5vw,2.7rem);font-weight:400;line-height:1.2;margin-bottom:24px}
+    .section-title em{font-style:italic;color:var(--amber-light)}
+    .amber-line{width:48px;height:1px;background:linear-gradient(90deg,var(--amber-light),transparent);margin-bottom:24px}
+
+    /* SCENE SECTION */
+    .scene{background:var(--bg2)}
+    .scene-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+    @media(max-width:640px){.scene-grid{grid-template-columns:1fr;gap:28px}}
+    .scene-img{border-radius:10px;overflow:hidden;position:relative}
+    .scene-img img{width:100%;display:block;border-radius:10px}
+    .scene-text p{font-size:.94rem;color:rgba(245,239,228,.8);line-height:1.85;margin-bottom:14px}
+    .scene-text p strong{color:var(--amber-light);font-weight:500}
+    .scene-text blockquote{border-left:2px solid var(--amber);padding:12px 18px;margin:20px 0;font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-style:italic;color:var(--cream);background:var(--bg3);border-radius:0 6px 6px 0}
+
+    /* ITEMS GRID */
+    .items-section{background:var(--bg)}
+    .items-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+    @media(max-width:640px){.items-grid{grid-template-columns:1fr;gap:28px}}
+    .items-img img{width:100%;border-radius:10px;display:block;filter:drop-shadow(0 12px 40px rgba(184,106,16,.3))}
+    .bullets-list{list-style:none;display:flex;flex-direction:column;gap:16px}
+    .bullets-list li{display:flex;gap:14px;align-items:flex-start}
+    .bullet-icon{flex-shrink:0;width:28px;height:28px;background:linear-gradient(135deg,var(--amber),#7a4008);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-top:2px}
+    .bullet-icon svg{width:12px;height:12px;stroke:#fff;fill:none;stroke-width:2.5}
+    .bullet-text strong{display:block;font-size:.9rem;font-weight:500;color:var(--cream);margin-bottom:2px}
+    .bullet-text span{font-size:.82rem;color:var(--muted);line-height:1.6}
+
+    /* CHOCOLATES HIGHLIGHT */
+    .choco-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+    .choco-tag{display:inline-flex;align-items:center;gap:8px;background:var(--bg3);border:1px solid var(--border);border-radius:20px;padding:7px 16px;font-size:.8rem;color:var(--cream)}
+    .choco-tag span{font-size:1.1rem}
+
+    /* TESTIMONIALS */
+    .testimonials{background:var(--bg2)}
+    .testimonials-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    @media(max-width:700px){.testimonials-grid{grid-template-columns:1fr}}
+    .testimonial-card{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:22px 18px;position:relative}
+    .testimonial-card::before{content:'"';font-family:'Cormorant Garamond',serif;font-size:4rem;color:var(--amber);line-height:1;position:absolute;top:10px;left:14px;opacity:.3}
+    .stars{display:flex;gap:3px;margin-bottom:12px}
+    .stars svg{width:13px;height:13px;fill:var(--gold);stroke:none}
+    .testimonial-text{font-size:.86rem;color:rgba(245,239,228,.8);line-height:1.75;margin-bottom:14px;position:relative;z-index:1}
+    .testimonial-author{font-size:.76rem;color:var(--muted)}
+    .testimonial-author strong{color:var(--amber-light);font-weight:500;display:block}
+    .verified{display:inline-flex;align-items:center;gap:4px;font-size:.63rem;color:#4caf7d;letter-spacing:.08em;text-transform:uppercase;margin-top:6px}
+    .verified svg{width:10px;height:10px;stroke:#4caf7d;fill:none;stroke-width:2.5}
+
+    /* OFFER */
+    .offer{background:var(--bg)}
+    .offer-box{background:var(--bg2);border:1px solid rgba(201,168,76,.2);border-radius:10px;padding:48px 40px;text-align:center;position:relative;overflow:hidden}
+    @media(max-width:500px){.offer-box{padding:32px 18px}}
+    .offer-box::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 55% 40% at 50% 0%,rgba(184,106,16,.12),transparent),radial-gradient(ellipse 55% 40% at 50% 100%,rgba(201,168,76,.06),transparent);pointer-events:none}
+    .offer-tag{display:inline-block;background:linear-gradient(135deg,var(--amber),#7a4008);color:#fff;font-size:.66rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;padding:5px 14px;border-radius:2px;margin-bottom:24px}
+    .offer-title{font-family:'Cormorant Garamond',serif;font-size:clamp(1.5rem,4vw,2.2rem);font-weight:400;margin-bottom:6px}
+    .offer-subtitle{font-size:.84rem;color:var(--muted);margin-bottom:28px}
+    .offer-items{display:flex;flex-direction:column;gap:10px;max-width:380px;margin:0 auto 28px;text-align:left}
+    .offer-item{display:flex;align-items:center;gap:12px;font-size:.9rem}
+    .offer-item svg{width:16px;height:16px;stroke:var(--amber-light);fill:none;stroke-width:2;flex-shrink:0}
+    .divider{width:100%;height:1px;background:var(--border);margin:24px 0}
+    .price-label{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+    .price-main{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,8vw,4.5rem);font-weight:600;line-height:1}
+    .price-main sup{font-size:.38em;vertical-align:super;color:var(--amber-light)}
+    .price-main .cents{font-size:.35em;vertical-align:baseline;color:var(--muted);font-weight:300}
+    .price-note{font-size:.76rem;color:var(--muted);margin-top:6px;margin-bottom:28px}
+    .btn-cta-large{display:inline-flex;align-items:center;justify-content:center;gap:12px;background:linear-gradient(135deg,var(--amber) 0%,#7a4008 60%,#5a2c04 100%);color:#fff;font-family:'DM Sans',sans-serif;font-size:1.05rem;font-weight:600;letter-spacing:.06em;text-decoration:none;padding:20px 48px;border-radius:3px;border:1px solid rgba(255,255,255,.1);box-shadow:0 6px 40px rgba(184,106,16,.45),inset 0 1px 0 rgba(255,255,255,.07);transition:transform .2s,box-shadow .2s;width:100%;max-width:420px;position:relative;overflow:hidden}
+    .btn-cta-large::before{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.09),transparent);animation:sweep 3s 1s infinite}
+    .btn-cta-large:hover{transform:translateY(-2px);box-shadow:0 10px 50px rgba(184,106,16,.6)}
+    .btn-cta-large svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2}
+    .trust-badges{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-top:18px}
+    .badge{display:flex;align-items:center;gap:6px;font-size:.73rem;color:var(--muted)}
+    .badge svg{width:14px;height:14px;stroke:var(--amber-light);fill:none;stroke-width:2}
+
+    /* URGENCY */
+    .urgency-section{background:linear-gradient(135deg,#0f0800,var(--bg),#0f0800);border-top:1px solid rgba(184,106,16,.3);border-bottom:1px solid rgba(184,106,16,.3)}
+    .urgency-section .section-inner{padding:56px 24px;text-align:center}
+    .urgency-section p{font-size:.88rem;color:var(--muted);margin-bottom:28px}
+
+    /* FAQ */
+    .faq{background:var(--bg2)}
+    .faq-list{display:flex;flex-direction:column}
+    .faq-item{border-bottom:1px solid var(--border)}
+    .faq-question{width:100%;background:none;border:none;color:var(--cream);font-family:'DM Sans',sans-serif;font-size:.93rem;font-weight:400;text-align:left;padding:20px 0;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;transition:color .2s}
+    .faq-question:hover{color:var(--amber-light)}
+    .faq-question svg{width:18px;height:18px;stroke:var(--amber-light);fill:none;stroke-width:2;flex-shrink:0;transition:transform .3s}
+    .faq-item.open .faq-question svg{transform:rotate(45deg)}
+    .faq-answer{font-size:.86rem;color:var(--muted);line-height:1.8;max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s}
+    .faq-item.open .faq-answer{max-height:200px;padding-bottom:18px}
+
+    footer{background:var(--bg);border-top:1px solid var(--border);padding:36px 24px;text-align:center}
+    footer p{font-size:.76rem;color:var(--muted);line-height:1.8}
+
+    .sticky-cta{display:none;position:fixed;bottom:0;left:0;right:0;z-index:100;background:var(--bg2);border-top:1px solid var(--border);padding:12px 16px}
+    @media(max-width:600px){.sticky-cta{display:block}}
+    .sticky-cta a{display:block;background:linear-gradient(135deg,var(--amber),#7a4008);color:#fff;text-align:center;font-family:'DM Sans',sans-serif;font-size:.9rem;font-weight:600;text-decoration:none;padding:14px;border-radius:3px;box-shadow:0 4px 20px rgba(184,106,16,.4)}
+
+    .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+  </style>
+</head>
+<body>
+
+<div class="top-bar"><span class="dot"></span>Dia dos Namorados: 12 de junho — estoque limitado · entrega garantida</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">Dia dos Namorados · 12 de Junho</div>
+  <h1>A cesta que ela vai<br><em>fotografar antes de abrir.</em></h1>
+  <p class="hero-sub">Ferrero Rocher, Nutella B-ready, ursinho de pelúcia e a caneca com o que ela precisa ler — tudo numa cesta com laço, pronta pra presentear.</p>
+  <div class="hero-img">
+    <img src="imagens/03/img-113.png" alt="Cesta Amo Você com chocolates e ursinho">
+  </div>
+  <a href="https://pay.cakto.com.br/PRODUTO-03" class="btn-cta">
+    <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+    Quero a cesta completa
+  </a>
+  <div class="trust-row">
+    <span class="trust-item"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Compra 100% segura</span>
+    <span class="trust-item"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><path d="M16 8h5l3 3v5h-8V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>Entrega garantida</span>
+    <span class="trust-item"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>Satisfação garantida</span>
+  </div>
+</section>
+
+<div style="position:relative;z-index:1;padding:0 24px">
+  <div class="countdown-wrap reveal">
+    <div class="countdown-label">⏳ Tempo restante até o Dia dos Namorados</div>
+    <div class="countdown-timer">
+      <div class="countdown-unit"><span class="num" id="cd-days">--</span><span class="lbl">dias</span></div>
+      <span class="countdown-sep">:</span>
+      <div class="countdown-unit"><span class="num" id="cd-hours">--</span><span class="lbl">horas</span></div>
+      <span class="countdown-sep">:</span>
+      <div class="countdown-unit"><span class="num" id="cd-mins">--</span><span class="lbl">min</span></div>
+      <span class="countdown-sep">:</span>
+      <div class="countdown-unit"><span class="num" id="cd-secs">--</span><span class="lbl">seg</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- SCENE -->
+<section class="scene">
+  <div class="section-inner">
+    <div class="scene-grid reveal">
+      <div class="scene-img">
+        <img src="imagens/03/img-116.png" alt="Cesta com Nutella, ursinho e caneca Amo Você">
+      </div>
+      <div class="scene-text">
+        <div class="section-eyebrow">O presente que cria um momento</div>
+        <h2 class="section-title">Imagina ela<br>chegando em casa<br><em>e vendo isso.</em></h2>
+        <div class="amber-line"></div>
+        <p>Ferrero Rocher — o de caixinha dourada, sim. Nutella B-ready. Biscoito ao leite. Um ursinho de pelúcia. E uma caneca escrito <strong>"Amo Você"</strong>.</p>
+        <p>Não precisa de jantar especial. Não precisa de flores que murcham em 48 horas.</p>
+        <blockquote>Só precisa disso: se enrolar no sofá, fazer o chocolate quente dela, pegar o ursinho — e te mandar mensagem: <em>"obrigada, foi perfeito."</em></blockquote>
+        <p>É exatamente isso que essa cesta entrega.</p>
+        <div class="choco-row">
+          <div class="choco-tag"><span>🍫</span> Ferrero Rocher</div>
+          <div class="choco-tag"><span>🍫</span> Nutella B-ready</div>
+          <div class="choco-tag"><span>🍪</span> Biscoito ao leite</div>
+          <div class="choco-tag"><span>🧸</span> Ursinho de pelúcia</div>
+          <div class="choco-tag"><span>☕</span> Caneca "Amo Você"</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INCLUDED -->
+<section class="items-section">
+  <div class="section-inner">
+    <div class="items-grid reveal">
+      <div class="items-img"><img src="imagens/03/img-112.png" alt="Cesta completa formato coração com laço vermelho"></div>
+      <div>
+        <div class="section-eyebrow">O que ela recebe</div>
+        <h2 class="section-title">Prazer imediato.<br><em>Lembrança que fica.</em></h2>
+        <div class="amber-line"></div>
+        <ul class="bullets-list">
+          <li><div class="bullet-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="bullet-text"><strong>Ferrero Rocher + Nutella B-ready + biscoito ao leite</strong><span>Os chocolates que ela realmente gosta — não genérico, não qualquer coisa</span></div></li>
+          <li><div class="bullet-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="bullet-text"><strong>Ursinho de pelúcia</strong><span>O presente afetivo que fica muito depois dos chocolates acabarem</span></div></li>
+          <li><div class="bullet-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="bullet-text"><strong>Caneca personalizada "Amo Você"</strong><span>Para o chá, café ou chocolate quente dela — ela vai usar toda manhã</span></div></li>
+          <li><div class="bullet-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="bullet-text"><strong>Cesta de vime com laço decorativo vermelho</strong><span>Parece cara, parece que foi montada por floricultura profissional — chega fechada e pronta</span></div></li>
+          <li><div class="bullet-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="bullet-text"><strong>Zero montagem da sua parte</strong><span>Chega pronta pra você pegar e entregar. Nada pra comprar separado, nada pra embrulhar</span></div></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="section-inner">
+    <div class="reveal" style="text-align:center;margin-bottom:40px">
+      <div class="section-eyebrow">Quem comprou, aprovou</div>
+      <h2 class="section-title">Ela fez foto.<br><em>Mandou pra família.</em></h2>
+    </div>
+    <div class="testimonials-grid reveal">
+      <div class="testimonial-card">
+        <div class="stars"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+        <p class="testimonial-text">"Ela tirou foto antes de abrir, depois abrindo, depois com cada item. Mandou pro grupo da família toda. O Ferrero Rocher foi a cereja do bolo — ela disse que eu sei o que ela gosta."</p>
+        <div class="testimonial-author"><strong>Felipe S.</strong>Florianópolis · comprou há 2 semanas</div>
+        <div class="verified"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Compra verificada</div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+        <p class="testimonial-text">"Chegou super bem embalada, pareceu loja de shopping. A caneca ainda usa todo dia no trabalho. O ursinho tá na mesa dela. Valeu cada centavo."</p>
+        <div class="testimonial-author"><strong>André L.</strong>Salvador · comprou no mês passado</div>
+        <div class="verified"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Compra verificada</div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+        <p class="testimonial-text">"Minha namorada recebeu e disse que fui o único namorado que já deu um presente que tinha tudo que ela gosta junto. A combinação do ursinho com os chocolates foi certeiro."</p>
+        <div class="testimonial-author"><strong>Caio M.</strong>Recife · comprou há 3 semanas</div>
+        <div class="verified"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Compra verificada</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OFFER -->
+<section class="offer" id="checkout">
+  <div class="section-inner">
+    <div class="offer-box reveal">
+      <div class="offer-tag">Oferta especial · Dia dos Namorados</div>
+      <h2 class="offer-title">Chocolates. Ursinho. Caneca.<br>Tudo numa cesta pronta.</h2>
+      <p class="offer-subtitle">Zero montagem, zero embrulho. Chega do jeito que você entrega.</p>
+      <div class="offer-items">
+        <div class="offer-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Ferrero Rocher</div>
+        <div class="offer-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Nutella B-ready</div>
+        <div class="offer-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Biscoito ao leite</div>
+        <div class="offer-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Ursinho de pelúcia</div>
+        <div class="offer-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Caneca personalizada "Amo Você"</div>
+        <div class="offer-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Cesta de vime com embalagem plástica e laço decorativo</div>
+      </div>
+      <div class="divider"></div>
+      <div class="price-label">Tudo isso por apenas</div>
+      <div class="price-main"><sup>R$</sup>79<span class="cents">,90</span></div>
+      <p class="price-note">Frete grátis · Pagamento seguro · Entrega antes do dia 12</p>
+      <a href="https://pay.cakto.com.br/PRODUTO-03" class="btn-cta-large">
+        <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        Quero a cesta completa
+      </a>
+      <div class="trust-badges">
+        <div class="badge"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Compra 100% segura</div>
+        <div class="badge"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><path d="M16 8h5l3 3v5h-8V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>Entrega garantida</div>
+        <div class="badge"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>Satisfação garantida</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- URGENCY -->
+<section class="urgency-section">
+  <div class="section-inner">
+    <div class="section-eyebrow reveal" style="text-align:center">⚠️ Atenção</div>
+    <h2 class="section-title reveal" style="text-align:center">12 de junho chegando.<br><em>Estoque limitado.</em></h2>
+    <p class="reveal" style="text-align:center">Pedidos feitos agora chegam antes do dia 12. Após o estoque esgotar, não há reposição a tempo.</p>
+    <div style="text-align:center" class="reveal">
+      <a href="https://pay.cakto.com.br/PRODUTO-03" class="btn-cta">
+        <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        Garantir antes que acabe
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <div class="section-inner">
+    <div class="reveal" style="margin-bottom:36px">
+      <div class="section-eyebrow">Dúvidas frequentes</div>
+      <h2 class="section-title">Perguntas<br><em>respondidas</em></h2>
+      <div class="amber-line"></div>
+    </div>
+    <div class="faq-list reveal">
+      <div class="faq-item">
+        <button class="faq-question">Chega antes do Dia dos Namorados (12/06)?<svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+        <div class="faq-answer">Sim. Prazo estimado de 5 a 10 dias úteis na maioria das regiões. Você recebe o código de rastreio por e-mail assim que o pedido for despachado.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Os chocolates são originais (Ferrero Rocher, Nutella)?<svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+        <div class="faq-answer">Sim, todos os chocolates são originais das marcas descritas. Ferrero Rocher, Nutella B-ready e biscoito ao leite — os mesmos que você compra no supermercado, só que numa apresentação muito mais bonita.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Precisa montar ou embrulhar algo?<svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+        <div class="faq-answer">Não. A cesta chega completamente montada, com embalagem plástica e laço decorativo. Você pega e entrega — zero esforço da sua parte.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer><p>© 2026 · Todos os direitos reservados<br>Este site não é afiliado ao Facebook, Instagram ou Meta Platforms Inc.<br><small>Depoimentos são de clientes reais. Resultados podem variar.</small></p></footer>
+
+<div class="sticky-cta"><a href="https://pay.cakto.com.br/PRODUTO-03">🔒 Cesta Completa — R$79,90</a></div>
+
+<script>
+  function tick(){const t=new Date('2026-06-12T00:00:00'),d=t-new Date();if(d<=0){document.querySelectorAll('.num').forEach(n=>n.textContent='00');return}document.getElementById('cd-days').textContent=String(Math.floor(d/86400000)).padStart(2,'0');document.getElementById('cd-hours').textContent=String(Math.floor((d%86400000)/3600000)).padStart(2,'0');document.getElementById('cd-mins').textContent=String(Math.floor((d%3600000)/60000)).padStart(2,'0');document.getElementById('cd-secs').textContent=String(Math.floor((d%60000)/1000)).padStart(2,'0')}
+  tick();setInterval(tick,1000);
+  const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');obs.unobserve(x.target)}})},{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+  document.querySelectorAll('.faq-question').forEach(b=>{b.addEventListener('click',()=>{const i=b.parentElement,o=i.classList.contains('open');document.querySelectorAll('.faq-item').forEach(x=>x.classList.remove('open'));if(!o)i.classList.add('open')})});
+  const offer=document.getElementById('checkout'),sticky=document.querySelector('.sticky-cta');
+  if(offer&&sticky)new IntersectionObserver(e=>{sticky.style.display=e[0].isIntersecting?'none':''},{ threshold:.2}).observe(offer);
+</script>
+</body>
+</html>

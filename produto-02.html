@@ -1,0 +1,791 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kit Completo Coração Azul — Dia dos Namorados</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:         #08090d;
+      --bg2:        #0d0f17;
+      --bg3:        #12141f;
+      --blue:       #2a5fa0;
+      --blue-light: #7eb8f7;
+      --blue-glow:  rgba(126,184,247,0.2);
+      --gold:       #c9a84c;
+      --gold-light: #e8cc7a;
+      --cream:      #f0eef8;
+      --muted:      #7a7a99;
+      --border:     rgba(126,184,247,0.14);
+      --border-g:   rgba(201,168,76,0.16);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--cream);
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── SHIMMER BAR ─────────────────────────────── */
+    .top-bar {
+      background: linear-gradient(90deg, #0d1f3c, var(--blue), #0d1f3c);
+      background-size: 200% 100%;
+      animation: bar-move 4s linear infinite;
+      padding: 10px 16px;
+      text-align: center;
+      font-size: 0.76rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--blue-light);
+      position: relative; z-index: 10;
+    }
+    @keyframes bar-move { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+    .top-bar .dot { display:inline-block;width:6px;height:6px;background:#7eb8f7;border-radius:50%;margin-right:8px;animation:blink 1s infinite;vertical-align:middle; }
+    @keyframes blink{0%,100%{opacity:1}50%{opacity:0.2}}
+
+    /* ── HERO ────────────────────────────────────── */
+    .hero {
+      position: relative;
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 64px 24px 80px;
+      text-align: center;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 65% 50% at 50% 20%, rgba(42,95,160,0.25), transparent 70%),
+        radial-gradient(ellipse 40% 40% at 80% 80%, rgba(126,184,247,0.06), transparent 60%);
+      pointer-events: none;
+    }
+
+    /* floating orbs */
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(60px);
+      pointer-events: none;
+      animation: float-orb ease-in-out infinite;
+    }
+    .orb-1 { width:300px;height:300px;background:rgba(42,95,160,0.12);top:-80px;right:-60px;animation-duration:8s; }
+    .orb-2 { width:200px;height:200px;background:rgba(126,184,247,0.07);bottom:80px;left:-40px;animation-duration:11s;animation-delay:2s; }
+    @keyframes float-orb {
+      0%,100% { transform: translateY(0) scale(1); }
+      50%      { transform: translateY(-30px) scale(1.05); }
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 6px 16px;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--blue-light);
+      margin-bottom: 24px;
+      background: rgba(42,95,160,0.1);
+      opacity: 0;
+      animation: fadeUp 0.7s 0.2s forwards;
+    }
+    .hero-badge::before {
+      content: '♥';
+      font-size: 0.8rem;
+      color: var(--blue-light);
+    }
+
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.9rem, 5.5vw, 3.4rem);
+      font-weight: 400;
+      line-height: 1.18;
+      max-width: 720px;
+      margin-bottom: 18px;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.35s forwards;
+    }
+    .hero h1 em { font-style: italic; color: var(--blue-light); }
+
+    .hero-sub {
+      font-size: 0.93rem;
+      color: var(--muted);
+      max-width: 500px;
+      margin-bottom: 36px;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.5s forwards;
+    }
+
+    /* trio photos */
+    .hero-trio {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr 1fr;
+      gap: 12px;
+      width: min(520px, 92vw);
+      margin: 0 auto 40px;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.6s forwards;
+    }
+    .hero-trio-item {
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .hero-trio-item img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .hero-trio-item:nth-child(2) {
+      border-color: rgba(126,184,247,0.3);
+      box-shadow: 0 0 30px rgba(126,184,247,0.1);
+    }
+    .trio-label {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: linear-gradient(to top, rgba(8,9,13,0.9), transparent);
+      padding: 10px 8px 8px;
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--blue-light);
+      text-align: center;
+    }
+
+    .hero-price-pill {
+      display: inline-block;
+      background: rgba(42,95,160,0.15);
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      padding: 8px 24px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--cream);
+      margin-bottom: 24px;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.75s forwards;
+    }
+    .hero-price-pill span { font-size: 0.8rem; font-weight: 300; color: var(--muted); font-family: 'Jost', sans-serif; margin-left: 4px; }
+
+    /* CTA */
+    .btn-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, var(--blue) 0%, #1a3f70 100%);
+      color: #fff;
+      font-family: 'Jost', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-decoration: none;
+      padding: 18px 42px;
+      border-radius: 3px;
+      border: 1px solid rgba(126,184,247,0.25);
+      box-shadow: 0 4px 30px rgba(42,95,160,0.45), inset 0 1px 0 rgba(255,255,255,0.07);
+      transition: transform 0.2s, box-shadow 0.2s;
+      position: relative; overflow: hidden;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.9s forwards;
+    }
+    .btn-cta::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%; width: 60%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+      animation: sweep 3s 2s infinite;
+    }
+    @keyframes sweep { 0%{left:-100%} 100%{left:200%} }
+    .btn-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 40px rgba(42,95,160,0.6); }
+    .btn-cta svg { width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2; }
+
+    .trust-row {
+      display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;
+      margin-top: 18px;
+      opacity: 0; animation: fadeUp 0.7s 1.05s forwards;
+    }
+    .trust-item { display:flex;align-items:center;gap:6px;font-size:0.73rem;color:var(--muted); }
+    .trust-item svg { width:13px;height:13px;stroke:var(--blue-light);fill:none;stroke-width:2; }
+
+    /* ── COUNTDOWN ───────────────────────────────── */
+    .countdown-wrap {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 28px 24px;
+      text-align: center;
+      max-width: 780px;
+      margin: 0 auto;
+      position: relative; z-index: 1;
+    }
+    .countdown-label { font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--blue-light);margin-bottom:14px; }
+    .countdown-timer { display:flex;justify-content:center;gap:8px; }
+    .countdown-unit {
+      display:flex;flex-direction:column;align-items:center;
+      background:var(--bg3);border:1px solid var(--border);border-radius:4px;
+      padding:12px 16px;min-width:62px;
+    }
+    .countdown-unit .num { font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:600;line-height:1; }
+    .countdown-unit .lbl { font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-top:4px; }
+    .countdown-sep { font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--blue-light);align-self:flex-start;padding-top:8px; }
+
+    /* ── SECTIONS ────────────────────────────────── */
+    section { position:relative;z-index:1; }
+    .section-inner { max-width:780px;margin:0 auto;padding:80px 24px; }
+    .section-eyebrow { font-size:0.68rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--blue-light);margin-bottom:12px; }
+    .section-title {
+      font-family:'Cormorant Garamond',serif;
+      font-size:clamp(1.75rem,4.5vw,2.7rem);
+      font-weight:400;line-height:1.2;margin-bottom:24px;
+    }
+    .section-title em { font-style:italic;color:var(--blue-light); }
+    .blue-line { width:48px;height:1px;background:linear-gradient(90deg,var(--blue-light),transparent);margin-bottom:24px; }
+
+    /* ── WORN SECTION ────────────────────────────── */
+    .worn { background: var(--bg); }
+    .worn-text p { font-size:0.94rem;color:rgba(240,238,248,0.8);line-height:1.85;margin-bottom:14px; }
+    .worn-text p strong { color:var(--blue-light);font-weight:500; }
+    .worn-grid {
+      display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;
+    }
+    @media(max-width:640px){ .worn-grid{grid-template-columns:1fr;gap:28px;} }
+
+    .worn-photos {
+      display:grid;grid-template-columns:1fr 1fr;gap:8px;
+    }
+    .worn-photo {
+      border-radius:8px;overflow:hidden;border:1px solid var(--border);position:relative;
+    }
+    .worn-photo img { width:100%;display:block;object-fit:cover; }
+    .worn-photo:first-child { grid-column:1/-1; }
+    .worn-photo-label {
+      position:absolute;bottom:0;left:0;right:0;
+      background:linear-gradient(to top,rgba(8,9,13,0.85),transparent);
+      padding:14px 10px 8px;
+      font-size:0.62rem;letter-spacing:0.14em;text-transform:uppercase;
+      color:var(--blue-light);text-align:center;
+    }
+
+    /* ── WHAT'S INCLUDED ─────────────────────────── */
+    .included { background:var(--bg2); }
+    .included-grid { display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start; }
+    @media(max-width:640px){ .included-grid{grid-template-columns:1fr;gap:28px;} }
+    .included-img img { width:100%;border-radius:8px;display:block;filter:drop-shadow(0 12px 40px rgba(42,95,160,0.3)); }
+
+    .bullets-list { list-style:none;display:flex;flex-direction:column;gap:16px; }
+    .bullets-list li { display:flex;gap:14px;align-items:flex-start; }
+    .bullet-icon {
+      flex-shrink:0;width:28px;height:28px;
+      background:linear-gradient(135deg,var(--blue),#1a3f70);
+      border-radius:50%;display:flex;align-items:center;justify-content:center;margin-top:2px;
+    }
+    .bullet-icon svg { width:12px;height:12px;stroke:#fff;fill:none;stroke-width:2.5; }
+    .bullet-text strong { display:block;font-size:0.9rem;font-weight:500;color:var(--cream);margin-bottom:2px; }
+    .bullet-text span { font-size:0.82rem;color:var(--muted);line-height:1.6; }
+
+    /* ── 3 PIECES VISUAL ─────────────────────────── */
+    .three-pieces { background:var(--bg); }
+    .pieces-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px; }
+    @media(max-width:500px){ .pieces-grid{grid-template-columns:1fr;} }
+    .piece-card {
+      background:var(--bg2);border:1px solid var(--border);border-radius:8px;
+      padding:24px 16px;text-align:center;position:relative;overflow:hidden;
+      transition:border-color 0.3s,box-shadow 0.3s;
+    }
+    .piece-card:hover { border-color:rgba(126,184,247,0.4);box-shadow:0 8px 30px rgba(42,95,160,0.2); }
+    .piece-card::before {
+      content:'';position:absolute;top:0;left:0;right:0;height:2px;
+      background:linear-gradient(90deg,transparent,var(--blue-light),transparent);
+      opacity:0;transition:opacity 0.3s;
+    }
+    .piece-card:hover::before { opacity:1; }
+    .piece-number {
+      font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:300;
+      color:rgba(126,184,247,0.2);line-height:1;margin-bottom:8px;
+    }
+    .piece-name { font-size:0.85rem;font-weight:500;color:var(--cream);margin-bottom:6px; }
+    .piece-desc { font-size:0.78rem;color:var(--muted);line-height:1.6; }
+
+    /* ── TESTIMONIALS ────────────────────────────── */
+    .testimonials { background:var(--bg2); }
+    .testimonials-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:16px; }
+    @media(max-width:700px){ .testimonials-grid{grid-template-columns:1fr;} }
+    .testimonial-card {
+      background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:22px 18px;position:relative;
+    }
+    .testimonial-card::before {
+      content:'"';font-family:'Cormorant Garamond',serif;font-size:4rem;
+      color:var(--blue);line-height:1;position:absolute;top:10px;left:14px;opacity:0.3;
+    }
+    .stars { display:flex;gap:3px;margin-bottom:12px; }
+    .stars svg { width:13px;height:13px;fill:var(--gold);stroke:none; }
+    .testimonial-text { font-size:0.86rem;color:rgba(240,238,248,0.8);line-height:1.75;margin-bottom:14px;position:relative;z-index:1; }
+    .testimonial-author { font-size:0.76rem;color:var(--muted); }
+    .testimonial-author strong { color:var(--blue-light);font-weight:500;display:block; }
+    .verified { display:inline-flex;align-items:center;gap:4px;font-size:0.63rem;color:#4caf7d;letter-spacing:0.08em;text-transform:uppercase;margin-top:6px; }
+    .verified svg { width:10px;height:10px;stroke:#4caf7d;fill:none;stroke-width:2.5; }
+
+    /* ── OFFER ───────────────────────────────────── */
+    .offer { background:var(--bg); }
+    .offer-box {
+      background:var(--bg2);border:1px solid var(--border-g);border-radius:10px;
+      padding:48px 40px;text-align:center;position:relative;overflow:hidden;
+    }
+    @media(max-width:500px){ .offer-box{padding:32px 18px;} }
+    .offer-box::before {
+      content:'';position:absolute;inset:0;
+      background:radial-gradient(ellipse 55% 40% at 50% 0%,rgba(42,95,160,0.12),transparent),
+                 radial-gradient(ellipse 55% 40% at 50% 100%,rgba(201,168,76,0.06),transparent);
+      pointer-events:none;
+    }
+    .offer-tag {
+      display:inline-block;background:linear-gradient(135deg,var(--blue),#1a3f70);
+      color:#fff;font-size:0.66rem;font-weight:600;letter-spacing:0.15em;text-transform:uppercase;
+      padding:5px 14px;border-radius:2px;margin-bottom:24px;
+    }
+    .offer-title { font-family:'Cormorant Garamond',serif;font-size:clamp(1.5rem,4vw,2.2rem);font-weight:400;margin-bottom:6px; }
+    .offer-subtitle { font-size:0.84rem;color:var(--muted);margin-bottom:28px; }
+    .offer-items { display:flex;flex-direction:column;gap:10px;max-width:380px;margin:0 auto 28px;text-align:left; }
+    .offer-item { display:flex;align-items:center;gap:12px;font-size:0.9rem; }
+    .offer-item svg { width:16px;height:16px;stroke:var(--blue-light);fill:none;stroke-width:2;flex-shrink:0; }
+    .divider { width:100%;height:1px;background:var(--border);margin:24px 0; }
+    .price-wrap { margin-bottom:28px; }
+    .price-label { font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:6px; }
+    .price-main { font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,8vw,4.5rem);font-weight:600;line-height:1; }
+    .price-main sup { font-size:0.38em;vertical-align:super;color:var(--blue-light); }
+    .price-main .cents { font-size:0.35em;vertical-align:baseline;color:var(--muted);font-weight:300; }
+    .price-note { font-size:0.76rem;color:var(--muted);margin-top:6px; }
+
+    .btn-cta-large {
+      display:inline-flex;align-items:center;justify-content:center;gap:12px;
+      background:linear-gradient(135deg,var(--blue) 0%,#1a3f70 60%,#0f2850 100%);
+      color:#fff;font-family:'Jost',sans-serif;font-size:1.05rem;font-weight:600;
+      letter-spacing:0.06em;text-decoration:none;padding:20px 48px;
+      border-radius:3px;border:1px solid rgba(126,184,247,0.2);
+      box-shadow:0 6px 40px rgba(42,95,160,0.45),inset 0 1px 0 rgba(255,255,255,0.07);
+      transition:transform 0.2s,box-shadow 0.2s;width:100%;max-width:420px;
+      position:relative;overflow:hidden;
+    }
+    .btn-cta-large::before {
+      content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;
+      background:linear-gradient(90deg,transparent,rgba(255,255,255,0.08),transparent);
+      animation:sweep 3s 1s infinite;
+    }
+    .btn-cta-large:hover { transform:translateY(-2px);box-shadow:0 10px 50px rgba(42,95,160,0.6); }
+    .btn-cta-large svg { width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2; }
+
+    .trust-badges { display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-top:18px; }
+    .badge { display:flex;align-items:center;gap:6px;font-size:0.73rem;color:var(--muted); }
+    .badge svg { width:14px;height:14px;stroke:var(--blue-light);fill:none;stroke-width:2; }
+
+    /* ── URGENCY ─────────────────────────────────── */
+    .urgency-section {
+      background:linear-gradient(135deg,#040d1a,var(--bg),#040d1a);
+      border-top:1px solid rgba(42,95,160,0.3);
+      border-bottom:1px solid rgba(42,95,160,0.3);
+    }
+    .urgency-section .section-inner { padding:56px 24px;text-align:center; }
+    .urgency-section p { font-size:0.88rem;color:var(--muted);margin-bottom:28px; }
+
+    /* ── FAQ ─────────────────────────────────────── */
+    .faq { background:var(--bg2); }
+    .faq-list { display:flex;flex-direction:column;gap:0; }
+    .faq-item { border-bottom:1px solid var(--border); }
+    .faq-question {
+      width:100%;background:none;border:none;color:var(--cream);
+      font-family:'Jost',sans-serif;font-size:0.93rem;font-weight:400;
+      text-align:left;padding:20px 0;cursor:pointer;
+      display:flex;justify-content:space-between;align-items:center;gap:12px;
+      transition:color 0.2s;
+    }
+    .faq-question:hover { color:var(--blue-light); }
+    .faq-question svg { width:18px;height:18px;stroke:var(--blue-light);fill:none;stroke-width:2;flex-shrink:0;transition:transform 0.3s; }
+    .faq-item.open .faq-question svg { transform:rotate(45deg); }
+    .faq-answer { font-size:0.86rem;color:var(--muted);line-height:1.8;max-height:0;overflow:hidden;transition:max-height 0.4s ease,padding 0.3s; }
+    .faq-item.open .faq-answer { max-height:200px;padding-bottom:18px; }
+
+    /* ── FOOTER ──────────────────────────────────── */
+    footer { background:var(--bg);border-top:1px solid var(--border);padding:36px 24px;text-align:center; }
+    footer p { font-size:0.76rem;color:var(--muted);line-height:1.8; }
+
+    /* ── STICKY CTA ──────────────────────────────── */
+    .sticky-cta { display:none;position:fixed;bottom:0;left:0;right:0;z-index:100;background:var(--bg2);border-top:1px solid var(--border);padding:12px 16px; }
+    @media(max-width:600px){ .sticky-cta{display:block;} }
+    .sticky-cta a {
+      display:block;background:linear-gradient(135deg,var(--blue),#1a3f70);
+      color:#fff;text-align:center;font-family:'Jost',sans-serif;font-size:0.9rem;font-weight:600;
+      letter-spacing:0.04em;text-decoration:none;padding:14px;border-radius:3px;
+      box-shadow:0 4px 20px rgba(42,95,160,0.4);
+    }
+
+    /* ── REVEAL ──────────────────────────────────── */
+    .reveal { opacity:0;transform:translateY(28px);transition:opacity 0.7s ease,transform 0.7s ease; }
+    .reveal.visible { opacity:1;transform:translateY(0); }
+
+    @keyframes fadeUp { from{opacity:0;transform:translateY(22px)} to{opacity:1;transform:translateY(0)} }
+  </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  <span class="dot"></span>
+  Dia dos Namorados: 12 de junho — estoque limitado · entrega garantida
+</div>
+
+<!-- ══ HERO ══════════════════════════════════════════ -->
+<section class="hero">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+
+  <div class="hero-badge">Kit completo · 3 peças</div>
+
+  <h1>Ela vai usar no pescoço,<br>no pulso e na orelha.<br><em>Ao mesmo tempo.</em></h1>
+  <p class="hero-sub">Kit completo: colar + pulseira + brincos com zircônia azul + Rosa Eterna + caixa premium — tudo combinando, tudo pronto.</p>
+
+  <div class="hero-trio">
+    <div class="hero-trio-item">
+      <img src="imagens/02/img-107.png" alt="Brincos coração azul">
+      <div class="trio-label">Brincos</div>
+    </div>
+    <div class="hero-trio-item">
+      <img src="imagens/02/img-106.png" alt="Colar coração azul">
+      <div class="trio-label">Colar</div>
+    </div>
+    <div class="hero-trio-item">
+      <img src="imagens/02/img-108.png" alt="Pulseira coração azul">
+      <div class="trio-label">Pulseira</div>
+    </div>
+  </div>
+
+  <div class="hero-price-pill">R$ 59,90 <span>· kit completo</span></div>
+
+  <a href="https://pay.cakto.com.br/PRODUTO-02" class="btn-cta">
+    <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+    Quero o kit completo
+  </a>
+
+  <div class="trust-row">
+    <span class="trust-item">
+      <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Compra 100% segura
+    </span>
+    <span class="trust-item">
+      <svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><path d="M16 8h5l3 3v5h-8V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+      Entrega garantida
+    </span>
+    <span class="trust-item">
+      <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      Satisfação garantida
+    </span>
+  </div>
+</section>
+
+<!-- COUNTDOWN -->
+<div style="position:relative;z-index:1;padding:0 24px;">
+  <div class="countdown-wrap reveal">
+    <div class="countdown-label">⏳ Tempo restante até o Dia dos Namorados</div>
+    <div class="countdown-timer">
+      <div class="countdown-unit"><span class="num" id="cd-days">--</span><span class="lbl">dias</span></div>
+      <span class="countdown-sep">:</span>
+      <div class="countdown-unit"><span class="num" id="cd-hours">--</span><span class="lbl">horas</span></div>
+      <span class="countdown-sep">:</span>
+      <div class="countdown-unit"><span class="num" id="cd-mins">--</span><span class="lbl">min</span></div>
+      <span class="countdown-sep">:</span>
+      <div class="countdown-unit"><span class="num" id="cd-secs">--</span><span class="lbl">seg</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ WORN SECTION ═══════════════════════════════════ -->
+<section class="worn">
+  <div class="section-inner">
+    <div class="worn-grid reveal">
+      <div class="worn-photos">
+        <div class="worn-photo">
+          <img src="imagens/02/img-109.png" alt="Kit completo colar pulseira zircônia azul">
+          <div class="worn-photo-label">As 3 peças juntas</div>
+        </div>
+        <div class="worn-photo">
+          <img src="imagens/02/img-105.png" alt="Casal romântico">
+          <div class="worn-photo-label">Presente romântico</div>
+        </div>
+        <div class="worn-photo">
+          <img src="imagens/02/img-104.png" alt="Kit aberto mostrando gavetas">
+          <div class="worn-photo-label">Caixa completa</div>
+        </div>
+      </div>
+      <div class="worn-text">
+        <div class="section-eyebrow">O presente que diz "eu pensei em você"</div>
+        <h2 class="section-title">Dar um presente<br>não é comprar<br><em>uma coisa.</em></h2>
+        <div class="blue-line"></div>
+        <p>É mostrar que você pensou. Que você não pegou o primeiro item, clicou e esperou chegar.</p>
+        <p>O Kit Amor Completo tem <strong>colar, pulseira e brincos</strong> — três peças que combinam entre si, todas com zircônia cúbica azul brilhante em formato de coração.</p>
+        <p>Mais uma <strong>Rosa Eterna preservada</strong> que dura de 3 a 5 anos sem água. Mais caixa elegante texturizada, cartão para você escrever a mensagem, e sacola de presente premium.</p>
+        <p>Ela vai abrir. Vai ver o colar. Vai ver os brincos. Vai ver a pulseira. Vai ver a rosa que não murcha. <strong>E vai entender que você planejou cada detalhe.</strong></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 3 PIECES ════════════════════════════════════════ -->
+<section class="three-pieces" style="background:var(--bg2);">
+  <div class="section-inner">
+    <div class="reveal" style="text-align:center;margin-bottom:8px;">
+      <div class="section-eyebrow">As 3 peças que combinam</div>
+      <h2 class="section-title">Uma para cada parte<br>do corpo dela.<br><em>Todas ao mesmo tempo.</em></h2>
+    </div>
+    <div class="pieces-grid reveal">
+      <div class="piece-card">
+        <div class="piece-number">01</div>
+        <div class="piece-name">Colar Coração</div>
+        <div class="piece-desc">Pingente coração com zircônia cúbica azul. Corrente prata resistente 45cm. Usa no pescoço todo dia.</div>
+      </div>
+      <div class="piece-card">
+        <div class="piece-number">02</div>
+        <div class="piece-name">Par de Brincos</div>
+        <div class="piece-desc">Brincos coração com zircônia azul combinando com o colar. Delicados, para uso casual e ocasiões especiais.</div>
+      </div>
+      <div class="piece-card">
+        <div class="piece-number">03</div>
+        <div class="piece-name">Pulseira Coração</div>
+        <div class="piece-desc">Pulseira ajustável com corações em zircônia azul. Completa o conjunto. Toda vez que ela olhar pro pulso, vai lembrar de você.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ WHAT'S INCLUDED ════════════════════════════════ -->
+<section class="included" style="background:var(--bg);">
+  <div class="section-inner">
+    <div class="included-grid reveal">
+      <div class="included-img">
+        <img src="imagens/02/img-103.png" alt="Kit completo com caixa, rosa eterna e acessórios">
+      </div>
+      <div>
+        <div class="section-eyebrow">O que vem na caixa</div>
+        <h2 class="section-title">Tudo que ela<br>precisa.<br><em>Nada que falta.</em></h2>
+        <div class="blue-line"></div>
+        <ul class="bullets-list">
+          <li>
+            <div class="bullet-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="bullet-text"><strong>Colar + Pulseira + Brincos combinando</strong><span>Zircônia cúbica azul brilhante, formato coração. Liga metálica resistente — não deforma, não desbota</span></div>
+          </li>
+          <li>
+            <div class="bullet-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="bullet-text"><strong>Rosa Eterna preservada (3–5 anos)</strong><span>Feita de rosa fresca natural. Mantém cor e forma sem rega. Símbolo do amor que não perece</span></div>
+          </li>
+          <li>
+            <div class="bullet-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="bullet-text"><strong>Caixa multifuncional texturizada</strong><span>Design elegante com múltiplas gavetas. Ela não vai jogar fora — vira porta-joias</span></div>
+          </li>
+          <li>
+            <div class="bullet-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="bullet-text"><strong>Cartão de felicitações incluso</strong><span>Para você escrever sua mensagem. Já está lá, esperando</span></div>
+          </li>
+          <li>
+            <div class="bullet-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="bullet-text"><strong>Sacola de presente premium</strong><span>Chega pronto para entregar. Zero embrulho, zero esforço da sua parte</span></div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TESTIMONIALS ═══════════════════════════════════ -->
+<section class="testimonials">
+  <div class="section-inner">
+    <div class="reveal" style="text-align:center;margin-bottom:40px;">
+      <div class="section-eyebrow">Quem comprou, aprovou</div>
+      <h2 class="section-title">Ela usou os três<br><em>no mesmo dia.</em></h2>
+    </div>
+    <div class="testimonials-grid reveal">
+      <div class="testimonial-card">
+        <div class="stars">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="testimonial-text">"Comprei achando que seria mais do mesmo, mas quando ela abriu a caixa e viu as 3 peças combinando com a rosa… ela simplesmente não acreditou. Usou tudo junto no mesmo dia."</p>
+        <div class="testimonial-author"><strong>Thiago R.</strong>Belo Horizonte · comprou há 2 semanas</div>
+        <div class="verified"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Compra verificada</div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="testimonial-text">"A qualidade superou a expectativa pelo preço. A zircônia brilha muito, parece pedra de verdade. A caixa por si só já impressiona. Minha namorada ficou guardando até a caixinha."</p>
+        <div class="testimonial-author"><strong>Bruno C.</strong>Porto Alegre · comprou no mês passado</div>
+        <div class="verified"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Compra verificada</div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="testimonial-text">"Ela me perguntou onde comprei e disse que pareceu loja cara. A rosa ainda está bonita semanas depois. Vou comprar de novo no aniversário. Produto de verdade."</p>
+        <div class="testimonial-author"><strong>Marcos A.</strong>São Paulo · comprou há 3 semanas</div>
+        <div class="verified"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Compra verificada</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ OFFER ══════════════════════════════════════════ -->
+<section class="offer" id="checkout">
+  <div class="section-inner">
+    <div class="offer-box reveal">
+      <div class="offer-tag">Oferta especial · Dia dos Namorados</div>
+      <h2 class="offer-title">3 peças. 1 rosa eterna.<br>Uma caixa que ela vai guardar.</h2>
+      <p class="offer-subtitle">Chega montado, embalado e pronto pra você entregar.</p>
+      <div class="offer-items">
+        <div class="offer-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Colar coração zircônia azul (45cm)</div>
+        <div class="offer-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Par de brincos coração zircônia azul</div>
+        <div class="offer-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Pulseira coração zircônia azul</div>
+        <div class="offer-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Rosa Eterna preservada (3–5 anos)</div>
+        <div class="offer-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Caixa multifuncional texturizada + cartão + sacola premium</div>
+      </div>
+      <div class="divider"></div>
+      <div class="price-wrap">
+        <div class="price-label">Tudo isso por apenas</div>
+        <div class="price-main"><sup>R$</sup>59<span class="cents">,90</span></div>
+        <p class="price-note">Frete grátis · Pagamento seguro · Entrega antes do dia 12</p>
+      </div>
+      <a href="https://pay.cakto.com.br/PRODUTO-02" class="btn-cta-large">
+        <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        Quero o kit completo
+      </a>
+      <div class="trust-badges">
+        <div class="badge"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Compra 100% segura</div>
+        <div class="badge"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><path d="M16 8h5l3 3v5h-8V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>Entrega garantida</div>
+        <div class="badge"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>Satisfação garantida</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ URGENCY ════════════════════════════════════════ -->
+<section class="urgency-section">
+  <div class="section-inner">
+    <div class="section-eyebrow reveal" style="text-align:center">⚠️ Atenção</div>
+    <h2 class="section-title reveal" style="text-align:center">Dia dos Namorados: <em>12 de junho</em><br>— últimas unidades</h2>
+    <p class="reveal" style="text-align:center">Pedidos feitos agora chegam antes do dia 12. Estoque limitado.</p>
+    <div style="text-align:center" class="reveal">
+      <a href="https://pay.cakto.com.br/PRODUTO-02" class="btn-cta">
+        <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        Garantir antes que acabe
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FAQ ════════════════════════════════════════════ -->
+<section class="faq">
+  <div class="section-inner">
+    <div class="reveal" style="margin-bottom:36px;">
+      <div class="section-eyebrow">Perguntas frequentes</div>
+      <h2 class="section-title">Dúvidas<br><em>respondidas</em></h2>
+      <div class="blue-line"></div>
+    </div>
+    <div class="faq-list reveal">
+      <div class="faq-item">
+        <button class="faq-question">
+          As 3 peças realmente combinam entre si? Ela pode usar as 3 juntas?
+          <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-answer">Sim, as 3 peças foram desenvolvidas como conjunto. Mesmo design de coração, mesma zircônia azul, mesmo acabamento prata. Ela pode usar os 3 juntos para um look completo ou separar por ocasião — cada peça funciona bem sozinha também.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          A Rosa Eterna dura mesmo 3 a 5 anos?
+          <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-answer">Sim. A rosa é feita de rosa fresca natural que passa por um processo de preservação que mantém a forma, cor e textura por 3 a 5 anos (ou mais) sem nenhuma rega ou cuidado especial. Basta manter longe de luz solar direta e umidade excessiva.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">
+          Chega antes do Dia dos Namorados (12/06)?
+          <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-answer">Sim. Pedidos realizados agora têm prazo estimado de 5 a 10 dias úteis na maioria das regiões do Brasil. Você recebe o código de rastreio assim que o pedido for despachado e pode acompanhar a entrega em tempo real.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══════════════════════════════════════════ -->
+<footer>
+  <p>© 2026 · Todos os direitos reservados<br>
+  Este site não é afiliado ao Facebook, Instagram ou Meta Platforms Inc.<br>
+  <small>Depoimentos são de clientes reais. Resultados podem variar.</small></p>
+</footer>
+
+<!-- STICKY CTA -->
+<div class="sticky-cta">
+  <a href="https://pay.cakto.com.br/PRODUTO-02">🔒 Kit Completo — R$59,90</a>
+</div>
+
+<script>
+  // COUNTDOWN
+  function tick(){
+    const target = new Date('2026-06-12T00:00:00');
+    const diff = target - new Date();
+    if(diff <= 0){ document.querySelectorAll('.countdown-unit .num').forEach(n=>n.textContent='00'); return; }
+    document.getElementById('cd-days').textContent  = String(Math.floor(diff/86400000)).padStart(2,'0');
+    document.getElementById('cd-hours').textContent = String(Math.floor((diff%86400000)/3600000)).padStart(2,'0');
+    document.getElementById('cd-mins').textContent  = String(Math.floor((diff%3600000)/60000)).padStart(2,'0');
+    document.getElementById('cd-secs').textContent  = String(Math.floor((diff%60000)/1000)).padStart(2,'0');
+  }
+  tick(); setInterval(tick,1000);
+
+  // SCROLL REVEAL
+  const obs = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  },{threshold:0.12});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+  // FAQ
+  document.querySelectorAll('.faq-question').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const item = btn.parentElement;
+      const open = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+      if(!open) item.classList.add('open');
+    });
+  });
+
+  // HIDE STICKY ON OFFER
+  const offer = document.getElementById('checkout');
+  const sticky = document.querySelector('.sticky-cta');
+  if(offer&&sticky){ new IntersectionObserver(entries=>{ sticky.style.display=entries[0].isIntersecting?'none':''; },{threshold:0.2}).observe(offer); }
+</script>
+</body>
+</html>
